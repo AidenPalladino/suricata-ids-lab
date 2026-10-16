@@ -1,4 +1,4 @@
-# Suricata IDS — Traffic Analysis Lab
+# Suricata IDS: Traffic Analysis Lab
 
 I used **Suricata**, an open-source intrusion detection system (IDS), to analyze captured network traffic and detect suspicious activity, including a custom detection rule I wrote and tested myself.
 
@@ -45,20 +45,20 @@ Suricata fired on the traffic, including **my custom rule** catching the ping to
 ![Suricata alerts, including my custom ICMP rule](screenshot-alerts.png)
 
 **What the alerts show:**
-- **My custom rule (`ICMP ping detected - custom rule`)** caught the ping between my VM (`10.0.2.15`) and `scanme.nmap.org` (`45.33.32.156`) — proof the rule I wrote detects real traffic.
-- **Suricata's built-in engine** also flagged `UDPv4 invalid checksum` on the DNS traffic. This is a known **capture artifact** (checksums are filled in by hardware after capture, so they look "invalid" in a pcap), not a real attack — the kind of noise a SOC analyst learns to recognize and rule out.
+- **My custom rule (`ICMP ping detected - custom rule`)** caught the ping between my VM (`10.0.2.15`) and `scanme.nmap.org` (`45.33.32.156`), proof the rule I wrote detects real traffic.
+- **Suricata's built-in engine** also flagged `UDPv4 invalid checksum` on the DNS traffic. This is a known **capture artifact** (checksums are filled in by hardware after capture, so they look "invalid" in a pcap), not a real attack, the kind of noise a SOC analyst learns to recognize and rule out.
 
 **Rule breakdown:**
-- `alert icmp` — raise an alert for ICMP (ping) traffic
-- `any any -> any any` — any source/port to any destination/port
-- `msg:` — the text shown in the alert
-- `sid:` — unique rule ID (1000000+ is reserved for custom rules)
+- `alert icmp`: raise an alert for ICMP (ping) traffic
+- `any any -> any any`: any source/port to any destination/port
+- `msg:`: the text shown in the alert
+- `sid:`: unique rule ID (1000000+ is reserved for custom rules)
 
 ## What I learned
 
 - How signature-based intrusion detection works
 - How to install Suricata and apply a community ruleset
-- How to read IDS alerts in `fast.log` and `eve.json` — the heart of SOC work
+- How to read IDS alerts in `fast.log` and `eve.json`, the heart of SOC work
 - How to write and test a custom detection rule
 - The difference between analyzing captured traffic and monitoring live
 
